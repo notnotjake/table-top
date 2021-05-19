@@ -1,57 +1,82 @@
-let state = 'start'
+class player {
+	constructor(name, score, colorMain, colorSub, wins, element) {
+		this.name = name
+		this.score = score
+		this.colorMain = colorMain
+		this.colorSub = colorSub
+		this.wins = wins
+		this.element = element
+	}
+}
 
-function gameScores (p1, p2) {
-	if (p1 == 0 && p2 == 0) {
-		console.log('setting both scores to 0')
-		document.querySelector('#p1-score').innerHTML = '0'
-		document.querySelector('#p2-score').innerHTML = '0'
-	} else if (p1 != 0) {
-		console.log('incrementing p1 score')
-		let i = parseInt(document.querySelector('#p1-score').innerHTML) + p1
-		document.querySelector('#p1-score').innerHTML = i
-	} else if (p2 != 0) {
-		console.log('incrementing p2 score')
-		let i = parseInt(document.querySelector('#p2-score').innerHTML) + p2
-		document.querySelector('#p2-score').innerHTML = i
-	} else {
-		console.log('thats not supposed to happen...')
+let p1 = new player("Player One", 0, '#62E379', '#000000', 0, document.querySelector('#p1-score') )
+let p2 = new player("Player Two", 0, '#92A5EE', '#000000', 0, document.querySelector('#p2-score') )
+let text = document.querySelector('#game-button')
+
+let game = {
+	state: "start",
+	scoreToWin: document.querySelector('#play-to-input').value,
+	players: [p1, p2],
+	winner: null
+}
+
+function updateScore (player) {
+	player.element.innerHTML = player.score
+}
+
+function updateGame () {
+	if (p1.score == game.scoreToWin) {
+		game.state = 'end'
+		game.winner = p1
+		p1.wins += 1
+	} else if (p2.score == game.scoreToWin) {
+		game.state = 'end'
+		game.winner = p2
+		p2.wins += 1
 	}
 	
-	if (state == 'start') {
-		document.querySelector('#game-button').innerHTML = 'Start by giving a player a point'
-	} else if (state == 'ongoing') {
-		document.querySelector('#game-button').innerHTML = 'Reset Scores'
-	} else {
-		console.log('thats not supposed to happen v2...')
+	if (game.state == 'playing') {
+		text.innerHTML = 'Tap to Reset'
+	} else if (game.state == 'end') {
+		text.innerHTML = game.winner.name + " Won!"
+	} else if (game.state == 'start') {
+		text.innerHTML = game.winner.name + " Give a point by tapping a player's square"
 	}
 }
+
+function gameClick (player) {
+	if (game.state != 'end') {
+		game.state = 'playing'
+		game.scoreToWin = document.querySelector('#play-to-input').value,
+		player.score += 1
+		updateScore(player)
+	}
+	updateGame()
+}
+
+function resetGame () {
+	game.state = 'start'
+	p1.score = 0
+	p2.score = 0
+	updateScore(p1)
+	updateScore(p2)
+}
+
 
 document.querySelector('#p1-card').addEventListener('click', () => {
-	state = 'ongoing'
-	console.log('p1 clicked')
-	gameScores(1,0)
+	gameClick(p1)
 })
 document.querySelector('#p2-card').addEventListener('click', () => {
-	state = 'ongoing'
-	console.log('p2 clicked')
-	gameScores(0,1)
+	gameClick(p2)
 })
-
-function gameButton () {
-	if (state == 'ongoing') {
-		console.log('resetting score')
-		state = 'start'
-		gameScores(0, 0)
-	} else if (state == 'start') {
-		console.log('doing nothing')
+document.querySelector('#controls').addEventListener('click', () => {
+	if (game.state == 'start') {
+		document.querySelector('#play-to-input').focus()
+		document.querySelector('#play-to-input').select()
+	} else if ( game.state == 'playing') {
+		console.log('add confirm reset')
+		resetGame()
+	} else {
+		resetGame()
 	}
-}
-
-document.querySelector('#play-to-wrapper').addEventListener('click', () => {
-	document.querySelector('#play-to-input').focus()
-	document.querySelector('#play-to-input').select()
-})
-
-document.querySelector('.game').addEventListener('click', () => {
-	gameButton()
 })

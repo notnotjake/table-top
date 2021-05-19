@@ -72,7 +72,7 @@ body {
 	align-items: center;
 	height: clamp(25px, 60%, 45px);
 	padding-left: 6px;
-	margin-right: 15px;
+	margin-right: 22px;
 }
 #play-to-wrapper p {
 	color: #b3b3b3;
