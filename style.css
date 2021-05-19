@@ -8,22 +8,23 @@ html, button, input, select, textarea {
 		font-family: 'Inter var', sans-serif;
 	}
 }
-
 html * {
 	margin: 0;
 	padding: 0;
 }
 
+html {
+	height: 100%
+}
+
 body {
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
 
 .player-card {
 	padding: 20px 15px;
-}
-.player-card {
 	height: 45%;
 }
 .game {
