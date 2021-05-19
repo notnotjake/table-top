@@ -22,17 +22,25 @@
 	
 	<body>
 		<div class="player-card p1" id="p1-card">
-			<h2 id="p1-name">Player One</h2>
-			<h1 id="p1-score">0
+			<div class="player-text">
+				<h2 id="p1-name">Player One</h2>
+				<h1 id="p1-score">0</h1>
+			</div>
 		</div>
 		
 		<div class="game">
-			<p id="game-button">Start by giving a player a point
+			<div id="play-to-wrapper">
+				<p>Play To</p>
+				<input id="play-to-input" type="number" pattern="[0-9]*" placeholder="Play To" value="11"/>
+			</div>
+			<p id="game-button">Give a point by tapping a player's square</p>
 		</div>
 		
 		<div class="player-card p2" id="p2-card">
-			<h2 id="p2-name">Player One</h2>
-			<h1 id="p2-score">0
+			<div class="player-text">
+				<h1 id="p2-score">0</h1>
+				<h2 id="p2-name">Player One</h2>
+			</div>
 		</div>
 		
 		<script type="text/javascript" src="app.js"></script>

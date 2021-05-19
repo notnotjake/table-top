@@ -47,6 +47,11 @@ function gameButton () {
 	}
 }
 
+document.querySelector('#play-to-wrapper').addEventListener('click', () => {
+	document.querySelector('#play-to-input').focus()
+	document.querySelector('#play-to-input').select()
+})
+
 document.querySelector('.game').addEventListener('click', () => {
 	gameButton()
 })
