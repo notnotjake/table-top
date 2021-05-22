@@ -89,3 +89,15 @@ input {
 	text-align: right;
 	color: #ffffff;
 }
+
+/* Chrome, Safari, Edge, Opera */
+#play-to-wrapper input::-webkit-outer-spin-button,
+#play-to-wrapper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+#play-to-wrapper input[type=number] {
+  -moz-appearance: textfield;
+}

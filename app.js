@@ -60,6 +60,7 @@ function resetGame () {
 	p2.score = 0
 	updateScore(p1)
 	updateScore(p2)
+	text.innerHTML = game.winner.name + " Give a point by tapping a player's square"
 }
 
 
